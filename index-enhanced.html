@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سبع الدجيل - شهداء لواء 43</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+            direction: rtl;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255,255,255,0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Loading screen */
+        #loading {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        #loading.hidden {
+            display: none;
+        }
+        
+        /* Modern animations */
+        @keyframes slideInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+            50% { box-shadow: 0 0 40px rgba(255,255,255,0.6); }
+        }
+        
+        .animate-slide-up {
+            animation: slideInUp 0.6s ease-out;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        /* Modern scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Islamic pattern decoration */
+        .islamic-pattern {
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.03) 70px);
+        }
+        
+        /* Card hover effects */
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        
+        /* Button effects */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">
+        <div style="text-align: center;">
+            <div style="font-size: 48px; margin-bottom: 20px; animation: glow 2s ease-in-out infinite;">⚔️</div>
+            <div>جاري تحميل موقع شهداء لواء 43...</div>
+        </div>
+    </div>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+        // ─── Storage System ───────────────────────────────────────────────────────
+        const DB_KEY = "sabaldujail_martyrs";
+        const ADMIN_PASS = "sab43admin";
+
+        const storageAPI = {
+            get: () => {
+                try {
+                    const data = localStorage.getItem(DB_KEY);
+                    return data ? JSON.parse(data) : defaultMartyrs;
+                } catch {
+                    return defaultMartyrs;
+                }
+            },
+            set: (data) => {
+                try {
+                    localStorage.setItem(DB_KEY, JSON.stringify(data));
+                    return true;
+                } catch {
+                    return false;
+                }
+            }
+        };
+
+        const defaultMartyrs = [
+            { id: 1, name: "الشهيد علي حسين الزيدي", province: "بغداد", unit: "لواء 43", date: "2014-10-12", bio: "بطل من أبطال لواء 43، استشهد في معارك الدفاع عن الوطن على أرض نينوى. كان مثالاً للشجاعة والإخلاص في ميادين الشرف.", photo: null },
+            { id: 2, name: "الشهيد محمد جاسم العبيدي", province: "كربلاء", unit: "لواء 43", date: "2015-03-05", bio: "استشهد وهو يدافع عن أرض العراق الطاهرة، رحل بعد معركة شرسة لم يتزعزع فيها إيمانه ووطنيته.", photo: null },
+            { id: 3, name: "الشهيد حسن عباس النجار", province: "النجف الاشرف", unit: "لواء 43", date: "2015-06-20", bio: "فدى روحه الطاهرة في ميادين الشرف، ابن النجف الأشرف الذي حمل راية الدفاع بكل فخر واعتزاز.", photo: null },
+            { id: 4, name: "الشهيد قاسم ناصر المحمداوي", province: "البصرة", unit: "لواء 43", date: "2016-01-15", bio: "من فرسان الجنوب الأوفياء، لبّى نداء الوطن وسقط شهيداً في ساحات النصر والكرامة.", photo: null },
+            { id: 5, name: "الشهيد عمر فاضل الشمري", province: "ديالى", unit: "لواء 43", date: "2015-09-08", bio: "ابن ديالى الباسل، حمل السلاح دفاعاً عن أهله وأرضه، ورحل مرفوع الرأس في زمرة الأبطال.", photo: null },
+            { id: 6, name: "الشهيد سعد كريم الموسوي", province: "ذي قار", unit: "لواء 43", date: "2016-04-22", bio: "قدّم روحه تقدمةً طاهرة على مذبح الوطن، يُذكر بين إخوانه بعزيمة لا تلين وروح مقاتل حقيقي.", photo: null },
+            { id: 7, name: "الشهيد يوسف طالب الحسناوي", province: "واسط", unit: "لواء 43", date: "2014-12-30", bio: "رسم بدمه الزكي خارطة الشرف، وترك أثراً لا يُمحى في قلوب رفاقه وأهل وطنه.", photo: null },
+            { id: 8, name: "الشهيد إبراهيم سلمان البدري", province: "بابل", unit: "لواء 43", date: "2015-07-14", bio: "فارس من بابل الحضارة، لبّى فتوى الجهاد الكفائي وسقط مدافعاً عن كل شبر من أرض العراق.", photo: null },
+        ];
+
+        // ─── Modern Icons ─────────────────────────────────────────────────────────
+        const ModernIcon = ({ icon, size = 24, color = "white", className = "" }) => (
+            <i className={`fas fa-${icon} ${className}`} style={{ fontSize: size, color }}></i>
+        );
+
+        // ─── Province Icons ───────────────────────────────────────────────────────
+        const PROVINCE_ICONS = {
+            "بغداد": "mosque",
+            "كربلاء": "dharmachakra",
+            "النجف الاشرف": "moon",
+            "البصرة": "anchor",
+            "ديالى": "leaf",
+            "ذي قار": "vase",
+            "واسط": "seedling",
+            "بابل": "landmark",
+            "ميسان": "water",
+            "المثنى": "sun",
+            "صلاح الدين": "shield-alt",
+            "الأنبار": "cactus",
+            "نينوى": "dove",
+            "كركوك": "mountain",
+            "السليمانية": "snowflake",
+            "دهوك": "tree",
+        };
+
+        // ─── Enhanced Martyr Card ───────────────────────────────────────────────────
+        const MartyrCard = ({ martyr, onClick, index = 0 }) => {
+            const [isHovered, setIsHovered] = useState(false);
+            
+            return (
+                <div
+                    onClick={() => onClick(martyr)}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    className={`animate-slide-up card-hover ${isHovered ? 'animate-glow' : ''}`}
+                    style={{
+                        background: isHovered 
+                            ? 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 100%)'
+                            : 'rgba(255, 255, 255, 0.95)',
+                        borderRadius: '20px',
+                        padding: '35px 25px',
+                        cursor: 'pointer',
+                        transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                        position: 'relative',
+                        overflow: 'hidden',
+                        transform: isHovered ? 'translateY(-15px) scale(1.03)' : 'translateY(0) scale(1)',
+                        boxShadow: isHovered 
+                            ? '0 25px 50px rgba(0,0,0,0.3), 0 0 30px rgba(102, 126, 234, 0.4)'
+                            : '0 15px 35px rgba(0,0,0,0.15)',
+                        border: isHovered ? '3px solid rgba(102, 126, 234, 0.6)' : '2px solid transparent',
+                        animationDelay: `${index * 0.1}s`,
+                        backdropFilter: 'blur(15px)',
+                    }}
+                >
+                    {/* Islamic pattern overlay */}
+                    <div className="islamic-pattern" style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        opacity: 0.1,
+                        pointerEvents: 'none',
+                    }} />
+                    
+                    {/* Decorative corner */}
+                    <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: 0,
+                        width: 0,
+                        height: 0,
+                        borderStyle: 'solid',
+                        borderWidth: '0 60px 60px 0',
+                        borderColor: 'transparent #667eea transparent transparent',
+                        opacity: 0.1,
+                    }} />
+                    
+                    {/* Profile image with enhanced design */}
+                    <div style={{
+                        width: '110px',
+                        height: '110px',
+                        borderRadius: '50%',
+                        margin: '0 auto 25px',
+                        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: 'relative',
+                        boxShadow: isHovered 
+                            ? '0 20px 40px rgba(102, 126, 234, 0.4), 0 0 60px rgba(102, 126, 234, 0.2)'
+                            : '0 15px 30px rgba(102, 126, 234, 0.3)',
+                        border: '5px solid rgba(255, 255, 255, 0.9)',
+                        transition: 'all 0.4s ease',
+                    }}>
+                        {martyr.photo ? (
+                            <img src={martyr.photo} alt={martyr.name} style={{
+                                width: '100%',
+                                height: '100%',
+                                borderRadius: '50%',
+                                objectFit: 'cover'
+                            }} />
+                        ) : (
+                            <div style={{ textAlign: 'center' }}>
+                                <ModernIcon icon="user" size={40} color="white" />
+                                <div style={{ fontSize: '12px', color: 'white', marginTop: '5px' }}>شهيد</div>
+                            </div>
+                        )}
+                        
+                        {/* Status indicator */}
+                        <div style={{
+                            position: 'absolute',
+                            bottom: '5px',
+                            right: '5px',
+                            width: '25px',
+                            height: '25px',
+                            borderRadius: '50%',
+                            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                            border: '3px solid white',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}>
+                            <ModernIcon icon="star" size={10} color="white" />
+                        </div>
+                    </div>
+
+                    {/* Enhanced name with gradient */}
+                    <h3 style={{
+                        background: isHovered 
+                            ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                            : 'linear-gradient(135deg, #2d3748 0%, #4a5568 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        fontSize: '22px',
+                        fontWeight: '800',
+                        margin: '0 0 20px',
+                        textAlign: 'center',
+                        lineHeight: '1.3',
+                        transition: 'all 0.3s ease',
+                    }}>{martyr.name}</h3>
+
+                    {/* Enhanced info badges */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <div style={{
+                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                            color: 'white',
+                            padding: '12px 20px',
+                            borderRadius: '30px',
+                            fontSize: '15px',
+                            fontWeight: '700',
+                            textAlign: 'center',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '10px',
+                            boxShadow: '0 8px 20px rgba(102, 126, 234, 0.3)',
+                            transition: 'all 0.3s ease',
+                        }}>
+                            <ModernIcon icon="map-marker-alt" size={16} />
+                            {martyr.province}
+                        </div>
+                        
+                        <div style={{
+                            background: 'rgba(102, 126, 234, 0.15)',
+                            color: '#667eea',
+                            padding: '10px 18px',
+                            borderRadius: '25px',
+                            fontSize: '14px',
+                            fontWeight: '600',
+                            textAlign: 'center',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            gap: '8px',
+                            border: '2px solid rgba(102, 126, 234, 0.2)',
+                            transition: 'all 0.3s ease',
+                        }}>
+                            <ModernIcon icon="calendar-alt" size={14} />
+                            {martyr.date}
+                        </div>
+                    </div>
+
+                    {/* Enhanced hover effect overlay */}
+                    {isHovered && (
+                        <div style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%)',
+                            pointerEvents: 'none',
+                            borderRadius: '20px',
+                        }} />
+                    )}
+                </div>
+            );
+        };
+
+        // ─── Enhanced Modal ─────────────────────────────────────────────────────────
+        const MartyrModal = ({ martyr, onClose }) => {
+            if (!martyr) return null;
+            
+            return (
+                <div onClick={onClose} style={{
+                    position: 'fixed',
+                    inset: 0,
+                    zIndex: 2000,
+                    background: 'rgba(0, 0, 0, 0.85)',
+                    backdropFilter: 'blur(15px)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '20px',
+                    animation: 'fadeIn 0.3s ease-out',
+                }}>
+                    <div onClick={e => e.stopPropagation()} style={{
+                        background: 'rgba(255, 255, 255, 0.98)',
+                        borderRadius: '30px',
+                        padding: '50px',
+                        maxWidth: '700px',
+                        width: '100%',
+                        position: 'relative',
+                        direction: 'rtl',
+                        boxShadow: '0 30px 60px rgba(0,0,0,0.4)',
+                        maxHeight: '90vh',
+                        overflowY: 'auto',
+                        backdropFilter: 'blur(20px)',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                    }}>
+                        {/* Islamic pattern background */}
+                        <div className="islamic-pattern" style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            opacity: 0.05,
+                            pointerEvents: 'none',
+                            borderRadius: '30px',
+                        }} />
+                        
+                        {/* Enhanced close button */}
+                        <button onClick={onClose} style={{
+                            position: 'absolute',
+                            top: '25px',
+                            left: '25px',
+                            background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                            border: 'none',
+                            color: 'white',
+                            width: '45px',
+                            height: '45px',
+                            borderRadius: '50%',
+                            cursor: 'pointer',
+                            fontSize: '20px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            transition: 'all 0.3s ease',
+                            boxShadow: '0 8px 20px rgba(245, 87, 108, 0.3)',
+                        }}
+                        onMouseEnter={e => {
+                            e.target.style.transform = 'rotate(90deg) scale(1.1)';
+                        }}
+                        onMouseLeave={e => {
+                            e.target.style.transform = 'rotate(0deg) scale(1)';
+                        }}>
+                            <ModernIcon icon="times" />
+                        </button>
+
+                        {/* Content */}
+                        <div style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
+                            {/* Enhanced Profile */}
+                            <div style={{
+                                width: '140px',
+                                height: '140px',
+                                borderRadius: '50%',
+                                margin: '0 auto 30px',
+                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                boxShadow: '0 20px 40px rgba(102, 126, 234, 0.4)',
+                                border: '6px solid rgba(255, 255, 255, 0.9)',
+                                position: 'relative',
+                            }}>
+                                {martyr.photo ? (
+                                    <img src={martyr.photo} alt={martyr.name} style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        borderRadius: '50%',
+                                        objectFit: 'cover'
+                                    }} />
+                                ) : (
+                                    <div style={{ textAlign: 'center' }}>
+                                        <ModernIcon icon="user" size={60} color="white" />
+                                        <div style={{ fontSize: '16px', color: 'white', marginTop: '8px', fontWeight: '700' }}>شهيد</div>
+                                    </div>
+                                )}
+                                
+                                {/* Status badge */}
+                                <div style={{
+                                    position: 'absolute',
+                                    bottom: '8px',
+                                    right: '8px',
+                                    width: '35px',
+                                    height: '35px',
+                                    borderRadius: '50%',
+                                    background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                                    border: '4px solid white',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    boxShadow: '0 5px 15px rgba(245, 87, 108, 0.4)',
+                                }}>
+                                    <ModernIcon icon="star" size={14} color="white" />
+                                </div>
+                            </div>
+
+                            {/* Enhanced Name */}
+                            <h2 style={{
+                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                fontSize: '32px',
+                                fontWeight: '900',
+                                margin: '0 0 25px',
+                                lineHeight: '1.3',
+                            }}>{martyr.name}</h2>
+
+                            {/* Enhanced Info cards */}
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', marginBottom: '30px' }}>
+                                {[
+                                    { icon: 'map-marker-alt', label: 'المحافظة', value: martyr.province, color: '#667eea' },
+                                    { icon: 'shield-alt', label: 'الوحدة', value: martyr.unit, color: '#764ba2' },
+                                    { icon: 'calendar-alt', label: 'تاريخ الاستشهاد', value: martyr.date, color: '#f093fb' },
+                                ].map(({ icon, label, value, color }, index) => (
+                                    <div key={label} style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '20px',
+                                        padding: '20px',
+                                        background: `linear-gradient(135deg, ${color}15 0%, ${color}08 100%)`,
+                                        borderRadius: '20px',
+                                        border: `2px solid ${color}30`,
+                                        transition: 'all 0.3s ease',
+                                    }}
+                                    onMouseEnter={e => {
+                                        e.currentTarget.style.transform = 'translateX(5px)';
+                                        e.currentTarget.style.boxShadow = `0 10px 25px ${color}25`;
+                                    }}
+                                    onMouseLeave={e => {
+                                        e.currentTarget.style.transform = 'translateX(0)';
+                                        e.currentTarget.style.boxShadow = 'none';
+                                    }}>
+                                        <div style={{
+                                            width: '50px',
+                                            height: '50px',
+                                            borderRadius: '50%',
+                                            background: `linear-gradient(135deg, ${color} 0%, ${color}cc 100%)`,
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            boxShadow: `0 8px 20px ${color}40`,
+                                        }}>
+                                            <ModernIcon icon={icon} size={20} color="white" />
+                                        </div>
+                                        <div style={{ textAlign: 'right', flex: 1 }}>
+                                            <div style={{ color: '#718096', fontSize: '14px', marginBottom: '5px', fontWeight: '600' }}>{label}</div>
+                                            <div style={{ color: '#2d3748', fontSize: '18px', fontWeight: '800' }}>{value}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Enhanced Bio */}
+                            <div style={{
+                                background: 'linear-gradient(135deg, #667eea08 0%, #764ba208 100%)',
+                                padding: '25px',
+                                borderRadius: '20px',
+                                border: '2px solid rgba(102, 126, 234, 0.2)',
+                                textAlign: 'right',
+                                marginBottom: '30px',
+                            }}>
+                                <h4 style={{
+                                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent',
+                                    fontSize: '20px',
+                                    fontWeight: '800',
+                                    margin: '0 0 15px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '12px',
+                                }}>
+                                    <ModernIcon icon="book-open" />
+                                    السيرة الذاتية
+                                </h4>
+                                <p style={{
+                                    color: '#4a5568',
+                                    fontSize: '17px',
+                                    lineHeight: '2',
+                                    margin: 0,
+                                    fontWeight: '500',
+                                }}>{martyr.bio}</p>
+                            </div>
+
+                            {/* Enhanced Verse */}
+                            <div style={{
+                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                borderRadius: '20px',
+                                padding: '30px',
+                                color: 'white',
+                                textAlign: 'center',
+                                position: 'relative',
+                                overflow: 'hidden',
+                            }}>
+                                <div className="islamic-pattern" style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    opacity: 0.1,
+                                }} />
+                                <div style={{ position: 'relative', zIndex: 1 }}>
+                                    <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginBottom: '20px' }}>
+                                        <ModernIcon icon="star" size={20} />
+                                        <ModernIcon icon="star" size={20} />
+                                        <ModernIcon icon="star" size={20} />
+                                    </div>
+                                    <p style={{
+                                        fontSize: '18px',
+                                        lineHeight: '2.2',
+                                        margin: 0,
+                                        fontStyle: 'italic',
+                                        fontWeight: '600',
+                                    }}>
+                                        ﴿ وَلَا تَحْسَبَنَّ الَّذِينَ قُتِلُوا فِي سَبِيلِ اللَّهِ أَمْوَاتًا ۚ بَلْ أَحْيَاءٌ عِندَ رَبِّهِمْ يُرْزَقُونَ ﴾
+                                    </p>
+                                    <p style={{ fontSize: '14px', marginTop: '12px', opacity: 0.9, fontWeight: '600' }}>
+                                        سورة آل عمران — الآية 169
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ─── Enhanced Admin Login ─────────────────────────────────────────────────────────
+        const AdminLogin = ({ onLogin, onClose }) => {
+            const [pass, setPass] = useState("");
+            const [err, setErr] = useState(false);
+            const [showPassword, setShowPassword] = useState(false);
+            
+            const submit = () => {
+                if (pass === ADMIN_PASS) { 
+                    onLogin(); 
+                    setErr(false); 
+                } else {
+                    setErr(true);
+                }
+            };
+            
+            return (
+                <div onClick={onClose} style={{
+                    position: 'fixed',
+                    inset: 0,
+                    zIndex: 3000,
+                    background: 'rgba(0, 0, 0, 0.85)',
+                    backdropFilter: 'blur(15px)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '20px',
+                }}>
+                    <div onClick={e => e.stopPropagation()} style={{
+                        background: 'rgba(255, 255, 255, 0.98)',
+                        borderRadius: '30px',
+                        padding: '50px',
+                        maxWidth: '450px',
+                        width: '100%',
+                        direction: 'rtl',
+                        textAlign: 'center',
+                        boxShadow: '0 30px 60px rgba(0,0,0,0.4)',
+                        backdropFilter: 'blur(20px)',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        position: 'relative',
+                    }}>
+                        {/* Islamic pattern background */}
+                        <div className="islamic-pattern" style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            opacity: 0.05,
+                            pointerEvents: 'none',
+                            borderRadius: '30px',
+                        }} />
+                        
+                        <div style={{ position: 'relative', zIndex: 1 }}>
+                            <div style={{ fontSize: '60px', marginBottom: '25px', color: '#667eea' }}>
+                                <ModernIcon icon="user-shield" />
+                            </div>
+                            <h2 style={{
+                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                fontSize: '28px',
+                                fontWeight: '900',
+                                marginBottom: '15px',
+                            }}>لوحة الإدارة</h2>
+                            <p style={{
+                                color: '#718096',
+                                fontSize: '16px',
+                                marginBottom: '35px',
+                                fontWeight: '600',
+                            }}>أدخل كلمة المرور للدخول</p>
+                            
+                            <div style={{ position: 'relative', marginBottom: '25px' }}>
+                                <ModernIcon 
+                                    icon="lock" 
+                                    style={{
+                                        position: 'absolute',
+                                        right: '20px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        color: '#667eea',
+                                        fontSize: '20px',
+                                    }}
+                                />
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    value={pass}
+                                    onChange={e => { setPass(e.target.value); setErr(false); }}
+                                    onKeyDown={e => e.key === "Enter" && submit()}
+                                    placeholder="كلمة المرور"
+                                    style={{
+                                        width: '100%',
+                                        background: 'rgba(102, 126, 234, 0.08)',
+                                        border: err ? '3px solid #f56565' : '3px solid rgba(102, 126, 234, 0.2)',
+                                        borderRadius: '20px',
+                                        padding: '18px 60px 18px 25px',
+                                        color: '#2d3748',
+                                        fontSize: '17px',
+                                        fontWeight: '600',
+                                        outline: 'none',
+                                        transition: 'all 0.3s ease',
+                                    }}
+                                    onFocus={e => {
+                                        e.target.style.borderColor = '#667eea';
+                                        e.target.style.boxShadow = '0 0 0 4px rgba(102, 126, 234, 0.1)';
+                                    }}
+                                    onBlur={e => {
+                                        e.target.style.borderColor = err ? '#f56565' : 'rgba(102, 126, 234, 0.2)';
+                                        e.target.style.boxShadow = 'none';
+                                    }}
+                                />
+                                <button
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    style={{
+                                        position: 'absolute',
+                                        left: '20px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        background: 'none',
+                                        border: 'none',
+                                        color: '#667eea',
+                                        cursor: 'pointer',
+                                        fontSize: '20px',
+                                        transition: 'all 0.3s ease',
+                                    }}
+                                    onMouseEnter={e => {
+                                        e.target.style.color = '#764ba2';
+                                        e.target.style.transform = 'translateY(-50%) scale(1.2)';
+                                    }}
+                                    onMouseLeave={e => {
+                                        e.target.style.color = '#667eea';
+                                        e.target.style.transform = 'translateY(-50%) scale(1)';
+                                    }}
+                                >
+                                    <ModernIcon icon={showPassword ? "eye-slash" : "eye"} />
+                                </button>
+                            </div>
+                            
+                            {err && (
+                                <p style={{
+                                    color: '#f56565',
+                                    fontSize: '15px',
+                                    marginBottom: '25px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '10px',
+                                    fontWeight: '600',
+                                    background: 'rgba(245, 101, 101, 0.1)',
+                                    padding: '12px',
+                                    borderRadius: '15px',
+                                }}>
+                                    <ModernIcon icon="exclamation-triangle" />
+                                    كلمة المرور غير صحيحة
+                                </p>
+                            )}
+                            
+                            <div style={{ display: 'flex', gap: '15px', marginTop: '30px' }}>
+                                <button onClick={submit} className="btn-primary" style={{
+                                    flex: 1,
+                                    padding: '18px',
+                                    fontSize: '17px',
+                                    fontWeight: '700',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    gap: '10px',
+                                }}>
+                                    <ModernIcon icon="sign-in-alt" />
+                                    دخول
+                                </button>
+                                <button onClick={onClose} className="btn-secondary" style={{
+                                    flex: 1,
+                                    padding: '18px',
+                                    fontSize: '17px',
+                                    fontWeight: '600',
+                                }}>
+                                    إلغاء
+                                </button>
+                            </div>
+                            
+                            <p style={{
+                                color: '#a0aec0',
+                                fontSize: '13px',
+                                marginTop: '25px',
+                                fontWeight: '500',
+                            }}>
+                                كلمة المرور الافتراضية: sab43admin
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        // ─── Enhanced Main App ─────────────────────────────────────────────────────────────
+        const App = () => {
+            const [martyrs, setMartyrs] = useState(() => storageAPI.get());
+            const [page, setPage] = useState("home");
+            const [search, setSearch] = useState("");
+            const [filterProvince, setFilterProvince] = useState("الكل");
+            const [selected, setSelected] = useState(null);
+            const [showLogin, setShowLogin] = useState(false);
+            const [showAdmin, setShowAdmin] = useState(false);
+
+            const provinces = ["الكل", ...new Set(martyrs.map(m => m.province))];
+            const filtered = martyrs.filter(m => {
+                return (m.name.includes(search) || m.province.includes(search) || m.bio.includes(search))
+                    && (filterProvince === "الكل" || m.province === filterProvince);
+            });
+
+            const nav = (p) => { 
+                setPage(p); 
+                setSearch(""); 
+                setFilterProvince("الكل"); 
+                window.scrollTo(0, 0); 
+            };
+
+            // Hide loading screen
+            useEffect(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, []);
+
+            return (
+                <div style={{ minHeight: '100vh', position: 'relative' }}>
+                    
+                    {/* ── ENHANCED HEADER ── */}
+                    <header style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        backdropFilter: 'blur(25px)',
+                        borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+                        position: 'sticky',
+                        top: 0,
+                        zIndex: 100,
+                        boxShadow: '0 15px 35px rgba(0,0,0,0.15)',
+                    }}>
+                        <div className="islamic-pattern" style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            opacity: 0.05,
+                        }} />
+                        
+                        <div style={{
+                            maxWidth: '1400px',
+                            margin: '0 auto',
+                            padding: '25px 40px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            gap: '40px',
+                            position: 'relative',
+                            zIndex: 1,
+                        }}>
+                            {/* Enhanced logo */}
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '20px',
+                                cursor: 'pointer',
+                            }} onClick={() => nav("home")}>
+                                <div style={{
+                                    width: '70px',
+                                    height: '70px',
+                                    borderRadius: '50%',
+                                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontSize: '32px',
+                                    boxShadow: '0 15px 35px rgba(102, 126, 234, 0.4)',
+                                    border: '4px solid rgba(255, 255, 255, 0.9)',
+                                    transition: 'all 0.3s ease',
+                                }}
+                                onMouseEnter={e => {
+                                    e.currentTarget.style.transform = 'scale(1.1) rotate(5deg)';
+                                }}
+                                onMouseLeave={e => {
+                                    e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
+                                }}>
+                                    <span style={{ fontSize: '35px' }}>🦁</span>
+                                </div>
+                                <div>
+                                    <h1 style={{
+                                        background: 'linear-gradient(90deg, #ffffff 0%, #e0e7ff 50%, #ffffff 100%)',
+                                        WebkitBackgroundClip: 'text',
+                                        WebkitTextFillColor: 'transparent',
+                                        fontSize: '30px',
+                                        fontWeight: '900',
+                                        margin: '0 0 8px',
+                                        textShadow: '0 3px 15px rgba(255,255,255,0.3)',
+                                    }}>سبع الدجيل</h1>
+                                    <p style={{
+                                        color: 'rgba(255, 255, 255, 0.9)',
+                                        fontSize: '15px',
+                                        margin: 0,
+                                        fontWeight: '600',
+                                    }}>شهداء لواء 43 — تشكيل سبع الدجيل</p>
+                                </div>
+                            </div>
+
+                            {/* Enhanced Navigation */}
+                            <nav style={{
+                                display: 'flex',
+                                gap: '12px',
+                                flexWrap: 'wrap',
+                                justifyContent: 'flex-end',
+                            }}>
+                                {[
+                                    ["home", "الرئيسية", "home"],
+                                    ["provinces", "المحافظات", "map-marked-alt"],
+                                    ["all", "الشهداء", "users"],
+                                    ["search", "بحث", "search"],
+                                ].map(([id, label, icon]) => (
+                                    <button
+                                        key={id}
+                                        onClick={() => nav(id)}
+                                        style={{
+                                            background: page === id 
+                                                ? 'rgba(255, 255, 255, 0.95)' 
+                                                : 'rgba(255, 255, 255, 0.1)',
+                                            border: page === id 
+                                                ? '3px solid rgba(255, 255, 255, 0.9)' 
+                                                : '2px solid rgba(255, 255, 255, 0.3)',
+                                            color: page === id ? '#667eea' : 'white',
+                                            padding: '14px 25px',
+                                            borderRadius: '30px',
+                                            cursor: 'pointer',
+                                            fontSize: '15px',
+                                            fontWeight: page === id ? '800' : '700',
+                                            transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '10px',
+                                            backdropFilter: 'blur(15px)',
+                                            boxShadow: page === id 
+                                                ? '0 8px 25px rgba(255,255,255,0.3)' 
+                                                : 'none',
+                                        }}
+                                        onMouseEnter={e => {
+                                            if (page !== id) {
+                                                e.target.style.background = 'rgba(255, 255, 255, 0.2)';
+                                                e.target.style.transform = 'translateY(-3px) scale(1.05)';
+                                            }
+                                        }}
+                                        onMouseLeave={e => {
+                                            if (page !== id) {
+                                                e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+                                                e.target.style.transform = 'translateY(0) scale(1)';
+                                            }
+                                        }}
+                                    >
+                                        <ModernIcon icon={icon} size={16} />
+                                        {label}
+                                    </button>
+                                ))}
+                                <button
+                                    onClick={() => setShowLogin(true)}
+                                    style={{
+                                        background: 'rgba(255, 255, 255, 0.1)',
+                                        border: '2px solid rgba(255, 255, 255, 0.3)',
+                                        color: 'white',
+                                        padding: '14px 20px',
+                                        borderRadius: '30px',
+                                        cursor: 'pointer',
+                                        fontSize: '15px',
+                                        fontWeight: '700',
+                                        transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '10px',
+                                        backdropFilter: 'blur(15px)',
+                                    }}
+                                    onMouseEnter={e => {
+                                        e.target.style.background = 'rgba(255, 255, 255, 0.2)';
+                                        e.target.style.transform = 'translateY(-3px) scale(1.05)';
+                                    }}
+                                    onMouseLeave={e => {
+                                        e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+                                        e.target.style.transform = 'translateY(0) scale(1)';
+                                    }}
+                                >
+                                    <ModernIcon icon="cog" size={16} />
+                                </button>
+                            </nav>
+                        </div>
+                    </header>
+
+                    {/* ══ ENHANCED HOME PAGE ══════════════════════════════════════════════════════════════ */}
+                    {page === "home" && (
+                        <div style={{ position: 'relative', zIndex: 1 }}>
+                            
+                            {/* Enhanced Hero Section */}
+                            <div style={{
+                                padding: '120px 40px 100px',
+                                textAlign: 'center',
+                                position: 'relative',
+                                overflow: 'hidden',
+                            }}>
+                                {/* Background decoration */}
+                                <div className="islamic-pattern" style={{
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    opacity: 0.08,
+                                }} />
+                                
+                                <div className="animate-fade-in" style={{ position: 'relative', maxWidth: '900px', margin: '0 auto' }}>
+                                    <div style={{
+                                        display: 'inline-flex',
+                                        gap: '15px',
+                                        marginBottom: '40px',
+                                        background: 'rgba(255, 255, 255, 0.15)',
+                                        padding: '20px 40px',
+                                        borderRadius: '50px',
+                                        backdropFilter: 'blur(20px)',
+                                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                                        boxShadow: '0 15px 35px rgba(0,0,0,0.2)',
+                                    }}>
+                                        <ModernIcon icon="star" color="white" size={20} className="animate-pulse" />
+                                        <ModernIcon icon="star" color="white" size={20} className="animate-pulse" style={{ animationDelay: '0.2s' }} />
+                                        <ModernIcon icon="star" color="white" size={20} className="animate-pulse" style={{ animationDelay: '0.4s' }} />
+                                    </div>
+
+                                    <h2 style={{
+                                        background: 'linear-gradient(135deg, #ffffff 0%, #e0e7ff 50%, #ffffff 100%)',
+                                        WebkitBackgroundClip: 'text',
+                                        WebkitTextFillColor: 'transparent',
+                                        fontSize: 'clamp(50px, 7vw, 80px)',
+                                        fontWeight: '900',
+                                        lineHeight: '1.2',
+                                        marginBottom: '25px',
+                                        textShadow: '0 8px 30px rgba(255,255,255,0.4)',
+                                        backgroundSize: '200% auto',
+                                        animation: 'shimmer 4s linear infinite',
+                                    }}>بل أحياء</h2>
+
+                                    <p style={{
+                                        color: 'rgba(255, 255, 255, 0.95)',
+                                        fontSize: '28px',
+                                        fontWeight: '700',
+                                        marginBottom: '30px',
+                                        textShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                                    }}>شهداء لواء 43 — تشكيل سبع الدجيل</p>
+
+                                    <p style={{
+                                        color: 'rgba(255, 255, 255, 0.85)',
+                                        fontSize: '20px',
+                                        lineHeight: '2',
+                                        marginBottom: '60px',
+                                        maxWidth: '700px',
+                                        margin: '0 auto 60px',
+                                        fontWeight: '500',
+                                        textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+                                    }}>
+                                        إحياءً خالداً لذكرى فرسان لواء 43 الذين قدّموا أرواحهم الزاكية فداءً للوطن والمقدسات
+                                    </p>
+
+                                    {/* Enhanced Stats */}
+                                    <div style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        gap: '0',
+                                        marginBottom: '60px',
+                                        flexWrap: 'wrap',
+                                        background: 'rgba(255, 255, 255, 0.1)',
+                                        backdropFilter: 'blur(20px)',
+                                        borderRadius: '25px',
+                                        padding: '40px',
+                                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                                        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                                    }}>
+                                        {[
+                                            [martyrs.length, "شهيد", "users", "#667eea"],
+                                            [new Set(martyrs.map(m => m.province)).size, "محافظة", "map-marked-alt", "#764ba2"],
+                                            ["43", "اللواء", "shield-alt", "#f093fb"],
+                                            [martyrs.filter(m => m.photo).length, "مع صورة", "camera", "#f5576c"],
+                                        ].map(([num, label, icon, color], i, arr) => (
+                                            <div key={label} style={{
+                                                padding: '30px 40px',
+                                                textAlign: 'center',
+                                                borderLeft: i < arr.length - 1 ? '1px solid rgba(255, 255, 255, 0.3)' : 'none',
+                                                flex: 1,
+                                                minWidth: '180px',
+                                                transition: 'all 0.3s ease',
+                                            }}
+                                            onMouseEnter={e => {
+                                                e.currentTarget.style.background = `${color}20`;
+                                                e.currentTarget.style.transform = 'translateY(-5px)';
+                                            }}
+                                            onMouseLeave={e => {
+                                                e.currentTarget.style.background = 'transparent';
+                                                e.currentTarget.style.transform = 'translateY(0)';
+                                            }}>
+                                                <div style={{
+                                                    background: `linear-gradient(135deg, ${color} 0%, ${color}cc 100%)`,
+                                                    WebkitBackgroundClip: 'text',
+                                                    WebkitTextFillColor: 'transparent',
+                                                    fontSize: '48px',
+                                                    fontWeight: '900',
+                                                    lineHeight: '1',
+                                                    marginBottom: '15px',
+                                                }}>{num}</div>
+                                                <div style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '16px', marginBottom: '8px' }}>
+                                                    <ModernIcon icon={icon} size={16} />
+                                                </div>
+                                                <div style={{ color: 'rgba(255, 255, 255, 0.95)', fontSize: '18px', fontWeight: '700' }}>
+                                                    {label}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Enhanced Action buttons */}
+                                    <div style={{
+                                        display: 'flex',
+                                        gap: '25px',
+                                        justifyContent: 'center',
+                                        flexWrap: 'wrap',
+                                    }}>
+                                        <button
+                                            onClick={() => nav("all")}
+                                            className="btn-primary"
+                                            style={{
+                                                padding: '20px 50px',
+                                                fontSize: '20px',
+                                                fontWeight: '800',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '12px',
+                                            }}
+                                        >
+                                            <ModernIcon icon="arrow-left" />
+                                            عرض كل الشهداء
+                                        </button>
+                                        <button
+                                            onClick={() => nav("provinces")}
+                                            className="btn-secondary"
+                                            style={{
+                                                padding: '20px 50px',
+                                                fontSize: '20px',
+                                                fontWeight: '700',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '12px',
+                                            }}
+                                        >
+                                            <ModernIcon icon="map-marked-alt" />
+                                            حسب المحافظة
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Enhanced Featured Martyrs */}
+                            <div style={{
+                                maxWidth: '1400px',
+                                margin: '0 auto',
+                                padding: '80px 40px',
+                            }}>
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '25px',
+                                    marginBottom: '50px',
+                                }}>
+                                    <div style={{ flex: 1, height: '3px', background: 'linear-gradient(to left, rgba(255, 255, 255, 0.5), transparent)' }} />
+                                    <h3 style={{
+                                        color: 'white',
+                                        fontSize: '32px',
+                                        fontWeight: '900',
+                                        whiteSpace: 'nowrap',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '20px',
+                                        textShadow: '0 4px 20px rgba(255,255,255,0.3)',
+                                    }}>
+                                        <ModernIcon icon="medal" size={28} />
+                                        أبطال لواء 43
+                                    </h3>
+                                    <div style={{ flex: 1, height: '3px', background: 'linear-gradient(to right, rgba(255, 255, 255, 0.5), transparent)' }} />
+                                </div>
+                                
+                                <div style={{
+                                    display: 'grid',
+                                    gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                                    gap: '40px',
+                                }}>
+                                    {martyrs.slice(0, 6).map((m, i) => (
+                                        <MartyrCard key={m.id} martyr={m} onClick={setSelected} index={i} />
+                                    ))}
+                                </div>
+                                
+                                {martyrs.length > 6 && (
+                                    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                                        <button
+                                            onClick={() => nav("all")}
+                                            className="btn-secondary"
+                                            style={{
+                                                padding: '18px 45px',
+                                                fontSize: '18px',
+                                                fontWeight: '700',
+                                                display: 'inline-flex',
+                                                alignItems: 'center',
+                                                gap: '12px',
+                                            }}
+                                        >
+                                            <ModernIcon icon="plus-circle" />
+                                            عرض {martyrs.length - 6} شهيد آخر
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* ══ OTHER PAGES ══════════════════════════════════════════════════════════════ */}
+                    {(page === "provinces" || page === "all" || page === "search") && (
+                        <div style={{
+                            maxWidth: '1400px',
+                            margin: '0 auto',
+                            padding: '80px 40px',
+                            position: 'relative',
+                            zIndex: 1,
+                        }}>
+                            {/* Page title */}
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '25px',
+                                marginBottom: '50px',
+                            }}>
+                                <div style={{ flex: 1, height: '3px', background: 'linear-gradient(to left, rgba(255, 255, 255, 0.5), transparent)' }} />
+                                <h3 style={{
+                                    color: 'white',
+                                    fontSize: '32px',
+                                    fontWeight: '900',
+                                    whiteSpace: 'nowrap',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '20px',
+                                    textShadow: '0 4px 20px rgba(255,255,255,0.3)',
+                                }}>
+                                    <ModernIcon icon={page === "provinces" ? "map-marked-alt" : page === "search" ? "search" : "users"} size={28} />
+                                    {page === "provinces" ? "الشهداء حسب المحافظة" : page === "search" ? "بحث في سجلات الشهداء" : "كل الشهداء"}
+                                </h3>
+                                <div style={{ flex: 1, height: '3px', background: 'linear-gradient(to right, rgba(255, 255, 255, 0.5), transparent)' }} />
+                            </div>
+
+                            {/* Search and filter for all/search pages */}
+                            {(page === "all" || page === "search") && (
+                                <div style={{
+                                    background: 'rgba(255, 255, 255, 0.15)',
+                                    backdropFilter: 'blur(25px)',
+                                    borderRadius: '25px',
+                                    padding: '40px',
+                                    marginBottom: '50px',
+                                    border: '1px solid rgba(255, 255, 255, 0.3)',
+                                    boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                                }}>
+                                    <div style={{
+                                        display: 'flex',
+                                        gap: '20px',
+                                        flexWrap: 'wrap',
+                                        marginBottom: '20px',
+                                    }}>
+                                        <div style={{ flex: 1, minWidth: '300px', position: 'relative' }}>
+                                            <ModernIcon 
+                                                icon="search" 
+                                                style={{
+                                                    position: 'absolute',
+                                                    right: '25px',
+                                                    top: '50%',
+                                                    transform: 'translateY(-50%)',
+                                                    color: 'rgba(255, 255, 255, 0.7)',
+                                                    fontSize: '22px',
+                                                }}
+                                            />
+                                            <input
+                                                type="text"
+                                                value={search}
+                                                onChange={e => setSearch(e.target.value)}
+                                                placeholder="ابحث بالاسم أو المحافظة..."
+                                                style={{
+                                                    width: '100%',
+                                                    background: 'rgba(255, 255, 255, 0.9)',
+                                                    border: '3px solid rgba(255, 255, 255, 0.3)',
+                                                    borderRadius: '20px',
+                                                    padding: '18px 60px 18px 25px',
+                                                    color: '#2d3748',
+                                                    fontSize: '17px',
+                                                    fontWeight: '600',
+                                                    outline: 'none',
+                                                    transition: 'all 0.3s ease',
+                                                }}
+                                                onFocus={e => {
+                                                    e.target.style.borderColor = '#667eea';
+                                                    e.target.style.boxShadow = '0 0 0 4px rgba(102, 126, 234, 0.1)';
+                                                }}
+                                                onBlur={e => {
+                                                    e.target.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                                                    e.target.style.boxShadow = 'none';
+                                                }}
+                                            />
+                                        </div>
+                                        
+                                        <select
+                                            value={filterProvince}
+                                            onChange={e => setFilterProvince(e.target.value)}
+                                            style={{
+                                                background: 'rgba(255, 255, 255, 0.9)',
+                                                border: '3px solid rgba(255, 255, 255, 0.3)',
+                                                borderRadius: '20px',
+                                                padding: '18px 25px',
+                                                color: '#2d3748',
+                                                fontSize: '17px',
+                                                fontWeight: '600',
+                                                cursor: 'pointer',
+                                                outline: 'none',
+                                                minWidth: '180px',
+                                            }}
+                                        >
+                                            {provinces.map(p => (
+                                                <option key={p} value={p}>{p}</option>
+                                            ))}
+                                        </select>
+                                        
+                                        {(search || filterProvince !== "الكل") && (
+                                            <button
+                                                onClick={() => { setSearch(""); setFilterProvince("الكل"); }}
+                                                style={{
+                                                    background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                                                    color: 'white',
+                                                    padding: '18px 30px',
+                                                    borderRadius: '20px',
+                                                    cursor: 'pointer',
+                                                    fontSize: '17px',
+                                                    fontWeight: '700',
+                                                    border: 'none',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '10px',
+                                                    transition: 'all 0.3s ease',
+                                                    boxShadow: '0 8px 20px rgba(245, 87, 108, 0.3)',
+                                                }}
+                                                onMouseEnter={e => {
+                                                    e.target.style.transform = 'translateY(-2px)';
+                                                    e.target.style.boxShadow = '0 12px 30px rgba(245, 87, 108, 0.4)';
+                                                }}
+                                                onMouseLeave={e => {
+                                                    e.target.style.transform = 'translateY(0)';
+                                                    e.target.style.boxShadow = '0 8px 20px rgba(245, 87, 108, 0.3)';
+                                                }}
+                                            >
+                                                <ModernIcon icon="times" />
+                                                مسح
+                                            </button>
+                                        )}
+                                    </div>
+                                    
+                                    <p style={{
+                                        color: 'rgba(255, 255, 255, 0.9)',
+                                        fontSize: '16px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '10px',
+                                        fontWeight: '600',
+                                    }}>
+                                        <ModernIcon icon="info-circle" />
+                                        النتائج: <span style={{ color: 'white', fontWeight: '800' }}>{filtered.length}</span> شهيد
+                                    </p>
+                                </div>
+                            )}
+
+                            {/* Content */}
+                            {page === "provinces" ? (
+                                // Enhanced Provinces grid
+                                <div style={{
+                                    display: 'grid',
+                                    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                                    gap: '35px',
+                                }}>
+                                    {[...new Set(martyrs.map(m => m.province))].map(prov => {
+                                        const count = martyrs.filter(m => m.province === prov).length;
+                                        const icon = PROVINCE_ICONS[prov] || "map-marker-alt";
+                                        const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c'];
+                                        const color = colors[Math.floor(Math.random() * colors.length)];
+                                        
+                                        return (
+                                            <div
+                                                key={prov}
+                                                onClick={() => { setFilterProvince(prov); nav("all"); }}
+                                                style={{
+                                                    background: 'rgba(255, 255, 255, 0.95)',
+                                                    borderRadius: '25px',
+                                                    padding: '40px 30px',
+                                                    textAlign: 'center',
+                                                    cursor: 'pointer',
+                                                    transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                                                    border: '3px solid transparent',
+                                                    position: 'relative',
+                                                    overflow: 'hidden',
+                                                }}
+                                                onMouseEnter={e => {
+                                                    e.currentTarget.style.transform = 'translateY(-12px) scale(1.02)';
+                                                    e.currentTarget.style.boxShadow = `0 25px 50px rgba(0,0,0,0.3), 0 0 40px ${color}40`;
+                                                    e.currentTarget.style.borderColor = `${color}60`;
+                                                }}
+                                                onMouseLeave={e => {
+                                                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                                                    e.currentTarget.style.boxShadow = 'none';
+                                                    e.currentTarget.style.borderColor = 'transparent';
+                                                }}
+                                            >
+                                                {/* Background pattern */}
+                                                <div className="islamic-pattern" style={{
+                                                    position: 'absolute',
+                                                    top: 0,
+                                                    left: 0,
+                                                    right: 0,
+                                                    bottom: 0,
+                                                    opacity: 0.05,
+                                                }} />
+                                                
+                                                <div style={{
+                                                    width: '90px',
+                                                    height: '90px',
+                                                    borderRadius: '50%',
+                                                    background: `linear-gradient(135deg, ${color} 0%, ${color}cc 100%)`,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    margin: '0 auto 25px',
+                                                    boxShadow: `0 15px 30px ${color}40`,
+                                                    border: '5px solid rgba(255, 255, 255, 0.9)',
+                                                    transition: 'all 0.3s ease',
+                                                    position: 'relative',
+                                                    zIndex: 1,
+                                                }}>
+                                                    <ModernIcon icon={icon} size={35} color="white" />
+                                                </div>
+                                                <h4 style={{
+                                                    color: '#2d3748',
+                                                    fontSize: '22px',
+                                                    fontWeight: '800',
+                                                    margin: '0 0 20px',
+                                                    position: 'relative',
+                                                    zIndex: 1,
+                                                }}>{prov}</h4>
+                                                <div style={{
+                                                    background: `linear-gradient(135deg, ${color} 0%, ${color}cc 100%)`,
+                                                    color: 'white',
+                                                    padding: '12px 25px',
+                                                    borderRadius: '30px',
+                                                    fontSize: '17px',
+                                                    fontWeight: '800',
+                                                    display: 'inline-flex',
+                                                    alignItems: 'center',
+                                                    gap: '10px',
+                                                    boxShadow: `0 8px 20px ${color}40`,
+                                                    position: 'relative',
+                                                    zIndex: 1,
+                                                }}>
+                                                    <ModernIcon icon="users" size={16} />
+                                                    {count} {count === 1 ? "شهيد" : "شهداء"}
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            ) : (
+                                // Martyrs grid
+                                filtered.length > 0 ? (
+                                    <div style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                                        gap: '40px',
+                                    }}>
+                                        {filtered.map((m, i) => (
+                                            <MartyrCard key={m.id} martyr={m} onClick={setSelected} index={i} />
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div style={{
+                                        textAlign: 'center',
+                                        padding: '100px 20px',
+                                        color: 'rgba(255, 255, 255, 0.9)',
+                                        fontSize: '22px',
+                                        fontWeight: '600',
+                                    }}>
+                                        <div style={{ fontSize: '70px', marginBottom: '25px', opacity: 0.7 }}>
+                                            <ModernIcon icon="search" />
+                                        </div>
+                                        لا توجد نتائج مطابقة
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    )}
+
+                    {/* ── ENHANCED FOOTER ── */}
+                    <footer style={{
+                        background: 'rgba(255, 255, 255, 0.1)',
+                        backdropFilter: 'blur(25px)',
+                        borderTop: '1px solid rgba(255, 255, 255, 0.3)',
+                        padding: '50px 40px',
+                        textAlign: 'center',
+                        marginTop: '80px',
+                        position: 'relative',
+                    }}>
+                        <div className="islamic-pattern" style={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            opacity: 0.05,
+                        }} />
+                        
+                        <div style={{ position: 'relative', zIndex: 1 }}>
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                gap: '15px',
+                                marginBottom: '25px',
+                            }}>
+                                <ModernIcon icon="star" color="white" size={20} className="animate-pulse" />
+                                <ModernIcon icon="star" color="white" size={20} className="animate-pulse" style={{ animationDelay: '0.2s' }} />
+                                <ModernIcon icon="star" color="white" size={20} className="animate-pulse" style={{ animationDelay: '0.4s' }} />
+                            </div>
+                            <h3 style={{
+                                color: 'white',
+                                fontSize: '28px',
+                                fontWeight: '900',
+                                margin: '0 0 15px',
+                                textShadow: '0 4px 20px rgba(255,255,255,0.3)',
+                            }}>سبع الدجيل</h3>
+                            <p style={{
+                                color: 'rgba(255, 255, 255, 0.9)',
+                                fontSize: '17px',
+                                margin: 0,
+                                fontWeight: '600',
+                            }}>
+                                شهداء لواء 43 | تشكيل سبع الدجيل | بل أحياء عند ربهم يُرزقون
+                            </p>
+                        </div>
+                    </footer>
+
+                    {/* Modals */}
+                    {selected && <MartyrModal martyr={selected} onClose={() => setSelected(null)} />}
+                    {showLogin && <AdminLogin onLogin={() => { setShowLogin(false); setShowAdmin(true); }} onClose={() => setShowLogin(false)} />}
+                </div>
+            );
+        };
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
